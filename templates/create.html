@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Booking</title>
+<style>
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(to right, #007bff, #00b8d4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-field select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    appearance: none; /* remove default arrow */
+    background: url('arrow.png') no-repeat right; /* custom arrow image */
+    width: 425px;
+}
+
+.form-field select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-field input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+}
+
+.form-button:not(:last-child) {
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<div class="form-container">
+    <form action="/create" method="POST">
+        <div class="form-field">
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" required>
+        </div>
+        
+        <div class="form-field">
+            <label for="bus-name">Bus Name:</label>
+            <select id="bus-name" name="busID" required>
+                <option value="">Select a bus</option>
+                <option value="Mira Liner">Mira Liner</option>
+                <option value="Avila Express">Avila Express</option>
+                <option value="Collao Transport">Collao Transport</option>
+            </select>
+        </div>
+
+        <div class="form-field">
+            <label for="seats-available">Seats Available:</label>
+            <input type="number" id="seats-available" name="seats" required>
+        </div>
+        <div class="form-field">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="travel_date" required>
+        </div>
+        <button type="submit" class="form-button">Submit</button>
+        <button type="button" class="form-button" onclick="window.history.back();">Cancel</button>
+    </form>
+    {% if message %}
+    <p style="color: red;">{{ message }}</p>
+    {% endif %}
+</div>
+</body>
+</html>

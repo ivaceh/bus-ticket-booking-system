@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookings</title>
+    <style>
+        body {
+          font-family: 'Montserrat', Arial, sans-serif;
+          background-color: #f0f0f0;
+          background-image: linear-gradient(135deg, #7db5ed 0%, #e0e0e0 50%, #d0d0d0 100%);          padding: 50px;
+          margin: 0;
+        }
+
+        .table-container {
+          background-color: #f0f0f0;
+          background-image: linear-gradient(135deg, #d0d0d0 0%, #e0e0e0 50%, #7db5ed 100%);          padding: 50px;          padding: 50px;
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          max-width: 800px;
+          margin: auto;
+        }
+
+        .table-title {
+          font-size: 24px;
+          font-weight: 600;
+          margin-bottom: 20px;
+          color: #333;
+        }
+
+      #searchInput {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-size: 16px;
+          margin-bottom: 20px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          width: 775px;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 16px;
+        }
+
+        th, td {
+          padding: 14px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #f2f2f2;
+          font-weight: 600;
+        }
+
+        td {
+          color: #555;
+        }
+
+        td:last-child,
+        th:last-child {
+          text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h1 class="table-title">Bookings</h1>
+        <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search for bookings..">
+        <table id="bookingsTable">
+            <tr>
+                <th>Booking ID</th>
+                <th>Bus Name</th>
+                <th>Travel Date</th>
+                <th>Destination</th>
+                <th>Seats</th>
+            </tr>
+            <!-- Booking rows will be added here dynamically -->
+        </table>
+    </div>
+
+    <script>
+        // JavaScript to fetch and display bookings
+        fetch('/read')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('bookingsTable');
+                data.forEach(booking => {
+                    const row = table.insertRow();
+                    Object.values(booking).forEach(text => {
+                        const cell = row.insertCell();
+                        cell.textContent = text;
+                    });
+                });
+            });
+        
+        // JavaScript to search bookings
+        function searchFunction() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById('bookingsTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName('td')[0];
+                if (td) {
+                    let txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        }
+
+    </script>
+</body>
+</html>
