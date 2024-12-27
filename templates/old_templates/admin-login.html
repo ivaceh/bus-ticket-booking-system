@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #007bff, #00b8d4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .login-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+   width: 100%;
+   position: relative;
+   overflow: hidden;
+
+  }
+  .login-field {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding: 10px 0;
+  }
+  .login-field input {
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  .login-button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  .login-button:hover {
+    background: #0056b3;
+  }
+</style>
+</head>
+<body>
+  
+  <div class="login-container">
+    <form action="{{ url_for('login') }}" method="POST">
+      <div class="login-field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+      </div>
+      <div class="login-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+      </div>
+      <button class="login-button" type="submit">Login</button>
+    </form>
+    {% if message %}
+    <p style="color: red;">{{ message }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
