@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bus Booking{% endblock %}</title>
+</head>
+<body>
+
+    <!-- Header section -->
+    <div class="header">
+        <a href="#home" class="title">Bus Booking</a>
+        {% if session.logged_in %}
+            <a href="#ticket">Ticket</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </div>
+
+    <!-- Flash messages are displayed here -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Content section -->
+    <div class="content">
+        {% block content %}
+        <!-- Content from child templates will be inserted here -->
+        {% endblock %}
+    </div>
+</body>
+</html>
