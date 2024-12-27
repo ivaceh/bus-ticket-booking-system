@@ -1,6 +1,6 @@
 flask
 flask_sqlalchemy
 flask_bcrypt
-pymsql
+pymysql
 flask_wtf
 wtforms
