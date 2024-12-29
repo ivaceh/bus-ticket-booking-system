@@ -10,15 +10,14 @@ from btbs import db
 from btbs import app, bcrypt, limiter, logger
 
 @app.route('/')
-@app.route('/index')
-def login_page():
-    form = LoginForm()
-    return render_template('login.html', form=form)
+@app.route('/home')
+def home_page():
+    return render_template('home.html')
 
 # login post
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 @limiter.limit("5 per minute")
-def login():
+def login_page():
     form = LoginForm()
     if form.validate_on_submit():
         try:
@@ -66,7 +65,7 @@ def logout():
     session.pop('is_admin', None)
     logger.info(f"User {username} logged out successfully.")
     flash('Logged out successfully')
-    return redirect(url_for('login_page'))
+    return redirect(url_for('home_page'))
 
 # register page
 @app.route('/register-page')
