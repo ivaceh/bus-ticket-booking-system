@@ -4,7 +4,31 @@
 {% endblock %}
 {% block content %}
 
-<form method="POST">
+<body class="text-center">
+    <div class="container" style="background-color: paleturquoise; margin-top: 20px; width: -webkit-fill-available; height: 360px; border-radius: 25px;">
+        <h2>---------</h2>
+        <form method="POST" action="">
+            <div>
+                <label for="bus_id">Bus ID:</label>
+                <input type="text" id="bus_id" name="bus_id" value="{{ booking.bus_id }}" required>
+            </div>
+            <div>
+                <label for="destination_id">Destination ID:</label>
+                <input type="text" id="destination_id" name="destination_id" value="{{ booking.destination_id }}" required>
+            </div>
+            <div>
+                <label for="travel_date">Travel Date:</label>
+                <input type="date" id="travel_date" name="travel_date" value="{{ booking.travel_date }}" required>
+            </div>
+            <div>
+                <button type="submit">Update Booking</button>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Destination</button>
+        </form>
+    </div>
+</body>
+
+<!-- <form method="POST">
     <div>
         <label for="bus_id">Bus ID:</label>
         <input type="text" id="bus_id" name="bus_id" value="{{ booking.bus_id }}" required>
@@ -20,6 +44,6 @@
     <div>
         <button type="submit">Update Booking</button>
     </div>
-</form>
+</form> -->
 
 {% endblock %}
