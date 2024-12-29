@@ -32,8 +32,23 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ url_for('view_bookings') }}">Booked Users</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('admin_panel') }}">Admin Panel</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="{{ url_for('admin_panel') }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin Panel
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ url_for('view_users') }}">View Users</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url_for('create_user') }}">Create New User</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url_for('view_buses') }}">View Buses</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url_for('add_bus') }}">Add New Bus</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url_for('view_destinations') }}">View Destinations</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url_for('add_destination') }}">Add New Destination</a>
+                  </div>
                 </li>
               {% else %}
                 <li class="nav-item">
@@ -46,18 +61,22 @@
                   <a class="nav-link" href="{{ url_for('my_tickets') }}">My Tickets</a>
                 </li>
               {% endif %}
+            {% endif %}
+          </ul>
+          <ul class="navbar-nav">
+            {% if session.logged_in %}
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login_page') }}">User</a>
+                <a class="nav-link" href="{{ url_for('login_page') }}">Login</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('register_page') }}">Register</a>
               </li>
             {% endif %}
-            </ul>
+          </ul>
         </div> 
     </nav> 
       
