@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bus Booking{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+</head>
+<body>
+
+    <!-- Header section -->
+    <div class="header">    
+        <a href="{% if session.logged_in %}{% if session.is_admin %}{{ url_for('admin_dashboard') }}{% else %}{{ url_for('user_dashboard') }}{% endif %}{% else %}#{% endif %}">Bus Booking</a>
+        {% if session.logged_in %}
+            {% if not session.is_admin %}
+            <a href="{{ url_for('bookTicketForm') }}">BookTicket</a>
+            <a href="{{ url_for('my_tickets') }}">MyTicket</a>
+            {% endif %}
+            <span class="user-info">₱{{ session['balance'] }} | Welcome, {{ session['username'] }}!</span>
+            {% if session.is_admin %}
+                <a href="{{ url_for('view_bookings') }}">Booked Users</a>
+                <a href="{{ url_for('admin_panel') }}">Admin Panel</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+        {% endif %}
+    </div>
+    
+    <!-- Flash messages are displayed here -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Content section -->
+    <div class="content">
+        {% block content %}
+        <!-- Content from child templates will be inserted here -->
+        {% endblock %}
+    </div>
+</body>
+</html>
