@@ -3,7 +3,8 @@ import re
 from wtforms import Form as BaseForm
 from wtforms import StringField, PasswordField, SubmitField, ValidationError, HiddenField, DateField, SelectField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
-from models import User, Bus  # Assuming you have a User model defined in models.py
+from btbs.models import User, Bus, Destination  # Assuming you have a User model defined in models.py
+from btbs import app
 
 # Password strength validation
 class PasswordStrength:
@@ -84,7 +85,6 @@ class createBusForm(FlaskForm):
     def validate_name(self, name):
         if not re.match("^[a-zA-Z0-9_.\s-]+$", name.data):
             raise ValidationError('Bus name contains invalid characters.')
-        from run import Bus, app
         with app.app_context():
             bus = Bus.query.filter_by(name=name.data).first()
             if bus:
@@ -99,7 +99,6 @@ class createDestinationForm(FlaskForm):
     def validate_name(self, name):
         if not re.match("^[a-zA-Z0-9_.-]+$", name.data):
             raise ValidationError('Destination name contains invalid characters.')
-        from run import Destination, app
         with app.app_context():
             destination = Destination.query.filter_by(name=name.data).first()
             if destination:
@@ -109,7 +108,6 @@ class createDestinationForm(FlaskForm):
 class bookBusTicketForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(bookBusTicketForm, self).__init__(*args, **kwargs)
-        from run import Bus, Destination, app
         with app.app_context():
             self.bus_id.choices = [(bus.id, bus.name) for bus in Bus.query.all()]
             self.destination_id.choices = [(destination.id, destination.name) for destination in Destination.query.all()]

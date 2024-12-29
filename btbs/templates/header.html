@@ -12,7 +12,7 @@
     <div class="header">    
         <a href="{% if session.logged_in %}{% if session.is_admin %}{{ url_for('admin_dashboard') }}{% else %}{{ url_for('user_dashboard') }}{% endif %}{% else %}#{% endif %}">Bus Booking</a>
         {% if session.logged_in %}
-            {% if session.isnot_admin %}
+            {% if not session.is_admin %}
             <a href="{{ url_for('bookTicketForm') }}">BookTicket</a>
             <a href="{{ url_for('my_tickets') }}">MyTicket</a>
             {% endif %}
