@@ -404,9 +404,11 @@ def bookTicketForm():
         flash('Access denied.')
         return redirect(url_for('login_page'))
     form = bookBusTicketForm()
+    destinations = Destination.query.all()
+    buses = Bus.query.all()
     if form.validate_on_submit():
         return redirect(url_for('book_ticket'))
-    return render_template('booking/booking.html', form=form)
+    return render_template('booking/booking.html', form=form, destinations=destinations, buses=buses)
 
 @app.route('/bookTicket', methods=['POST'])
 def book_ticket():
@@ -454,8 +456,10 @@ def book_ticket():
             flash(f'Error booking ticket: {e}')
         finally:
             db.session.close()
-        return redirect(url_for('user_dashboard'))
-    return render_template('booking/booking.html', form=form)
+        return redirect(url_for('my_tickets'))
+    destinations = Destination.query.all()
+    buses = Bus.query.all()
+    return render_template('booking/booking.html', form=form, destinations=destinations, buses=buses)
 
 @app.route('/MyTickets')
 def my_tickets():
