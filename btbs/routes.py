@@ -350,7 +350,7 @@ def add_destination():
 
 @app.route('/view-bookings')
 def view_bookings():
-    if not session.get('logged_in'):
+    if not session.get('logged_in') or not session.get('is_admin'):
         flash('Access denied.')
         return redirect(url_for('login_page'))
     bookings = Booking.query.all()
