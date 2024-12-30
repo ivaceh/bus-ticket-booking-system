@@ -11,7 +11,7 @@ The Bus Booking System is a web application designed to facilitate the booking o
    - User roles (admin and regular user) to control access to different parts of the application.
 
 2. **Improved User Interface:**
-   - Modern and responsive design using Bootstrap.
+   - Design using Bootstrap.
    - Carousel on the user and admin main pages for a visually appealing interface.
 
 3. **Enhanced Booking System:**
