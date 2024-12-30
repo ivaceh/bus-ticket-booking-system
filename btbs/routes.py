@@ -203,7 +203,7 @@ def create_user():
 
 @app.route('/view-buses')
 def view_buses():
-    if not session.get('logged_in'):
+    if not session.get('logged_in') or not session.get('is_admin'):
         flash('Access denied.')
         return redirect(url_for('login_page'))
     buses = Bus.query.all()
@@ -277,7 +277,7 @@ def add_bus():
 
 @app.route('/view-destinations')
 def view_destinations():
-    if not session.get('logged_in'):
+    if not session.get('logged_in') or not session.get('is_admin'):
         flash('Access denied.')
         return redirect(url_for('login_page'))
     destinations = Destination.query.all()
