@@ -106,21 +106,21 @@ def register():
 @app.route('/admin-dashboard')
 def admin_dashboard():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     return render_template('admin_dashboard.html')
 
 @app.route('/admin-panel')
 def admin_panel():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     return render_template('admin_panel.html')
 
 @app.route('/user-dashboard')
 def user_dashboard():
     if not session.get('logged_in') or session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     return render_template('user_dashboard.html')
 
@@ -129,7 +129,7 @@ def user_dashboard():
 @app.route('/edit-user/<int:user_id>', methods=['GET', 'POST'])
 def edit_user(user_id):
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     user = User.query.get_or_404(user_id)
     assert user is not None, "User should exist in the database"
@@ -156,7 +156,7 @@ def edit_user(user_id):
 @app.route('/delete-user/<int:user_id>')
 def delete_user(user_id):
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     user = User.query.get_or_404(user_id)
     try:
@@ -172,7 +172,7 @@ def delete_user(user_id):
 @app.route('/view-users')
 def view_users():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     users = User.query.all()
     return render_template('user/view_users.html', users=users)
@@ -180,7 +180,7 @@ def view_users():
 @app.route('/create-user', methods=['GET', 'POST'])
 def create_user():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     
     form = createUserForm()
@@ -204,7 +204,7 @@ def create_user():
 @app.route('/view-buses')
 def view_buses():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     buses = Bus.query.all()
     return render_template('bus/view_bus.html', buses=buses)
@@ -213,7 +213,7 @@ def view_buses():
 @app.route('/edit-bus/<int:bus_id>', methods=['GET', 'POST'])
 def edit_bus(bus_id):
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     bus = Bus.query.get_or_404(bus_id)
     assert bus is not None, "Bus should exist in the database"
@@ -240,7 +240,7 @@ def edit_bus(bus_id):
 @app.route('/delete-bus/<int:bus_id>')
 def delete_bus(bus_id):
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     bus = Bus.query.get_or_404(bus_id)
     try:
@@ -256,7 +256,7 @@ def delete_bus(bus_id):
 @app.route('/add-bus', methods=['GET', 'POST'])
 def add_bus():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     form = createBusForm()
     if form.validate_on_submit():
@@ -278,7 +278,7 @@ def add_bus():
 @app.route('/view-destinations')
 def view_destinations():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     destinations = Destination.query.all()
     return render_template('destination/view_destination.html', destinations=destinations)
@@ -286,7 +286,7 @@ def view_destinations():
 @app.route('/edit-destination/<int:destination_id>', methods=['GET', 'POST'])
 def edit_destination(destination_id):
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     destination = Destination.query.get_or_404(destination_id)
     assert destination is not None, "Destination should exist in the database"
@@ -351,7 +351,7 @@ def add_destination():
 @app.route('/view-bookings')
 def view_bookings():
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     bookings = Booking.query.all()
     return render_template('booking/view_bookedUsers.html', bookings=bookings)
@@ -359,7 +359,7 @@ def view_bookings():
 @app.route('/edit-booking/<int:booking_id>', methods=['GET', 'POST'])
 def edit_booking(booking_id):
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     booking = Booking.query.get_or_404(booking_id)
     if request.method == 'POST':
@@ -385,7 +385,7 @@ def edit_booking(booking_id):
 @app.route('/delete-booking/<int:booking_id>')
 def delete_booking(booking_id):
     if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     booking = Booking.query.get_or_404(booking_id)
     db.session.delete(booking)
@@ -401,7 +401,7 @@ def delete_booking(booking_id):
 @app.route('/bookTicketForm', methods=['GET', 'POST'])
 def bookTicketForm():
     if not session.get('logged_in'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     form = bookBusTicketForm()
     destinations = Destination.query.all()
@@ -413,7 +413,7 @@ def bookTicketForm():
 @app.route('/bookTicket', methods=['POST'])
 def book_ticket():
     if not session.get('logged_in'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     form = bookBusTicketForm()
     if form.validate_on_submit():
@@ -464,7 +464,7 @@ def book_ticket():
 @app.route('/MyTickets')
 def my_tickets():
     if not session.get('logged_in'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     username = session.get('username')
     if not username:
@@ -482,7 +482,7 @@ def my_tickets():
 @app.route('/cancel-booking/<int:booking_id>', methods=['GET', 'POST'])
 def cancel_booking(booking_id):
     if not session.get('logged_in'):
-        flash('Access denied.')
+        flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
     username = session.get('username')
     if not username:
