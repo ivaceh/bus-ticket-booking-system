@@ -34,25 +34,25 @@ def login_page():
                     session['isnot_admin'] = True
                 else:
                     session.pop('isnot_admin', None)
-                logger.info(f"User {username} logged in successfully.")
+                logger.info(f"User {username} logged in successfully.", 'success')
                 if user.is_admin:
                     return redirect('/admin-dashboard')
                 else:
                     return redirect('/user-dashboard')
             else:
                 logger.warning(f"Failed login attempt for username: {username}")
-                flash('Invalid username or password')
+                flash('Invalid username or password', 'danger')
                 return redirect(url_for('login_page'))
         except pymysql.MySQLError as e:
             app.logger.error(f"MySQL error during login: {e}")
-            flash('A database error occurred during login. Please try again.', 'error')
+            flash('A database error occurred during login. Please try again.', 'danger')
         except Exception as e:
             app.logger.error(f"Error during login: {e}")
-            flash('An error occurred during login. Please try again.', 'error')
+            flash('An error occurred during login. Please try again.', 'danger')
         finally:
             db.session.close()
     elif form.is_submitted():
-        flash('Form validation failed. Please check your inputs.')
+        flash('Form validation failed. Please check your inputs.', 'danger')
     return render_template('login.html', form=form)
 
 # logout
@@ -64,7 +64,7 @@ def logout():
     session.pop('balance', None)
     session.pop('is_admin', None)
     logger.info(f"User {username} logged out successfully.")
-    flash('Logged out successfully')
+    flash('Logged out successfully', 'success')
     return redirect(url_for('home_page'))
 
 # register page
@@ -88,7 +88,7 @@ def register():
             db.session.commit()
             assert user.id is not None, "User ID should be assigned after commit"
             logger.info(f"New user registered: {username}")
-            flash('Account created successfully. Please login.')
+            flash('Account created successfully. Please login.', 'success')
             return redirect(url_for('login_page'))
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()
@@ -96,7 +96,7 @@ def register():
             flash('A database error occurred during registration. Please try again.', 'error')
         except Exception as e:
             app.logger.error(f"Error during registration: {e}")
-            flash('An error occurred during registration. Please try again.', 'error')
+            flash('An error occurred during registration. Please try again.', 'danger')
         finally:
             db.session.close()
     else:
@@ -140,15 +140,15 @@ def edit_user(user_id):
             user.is_admin = 'is_admin' in request.form
             db.session.commit()
             logger.info(f"User {user.username} updated successfully.")
-            flash('User updated successfully.')
+            flash('User updated successfully.', 'success')
             return redirect(url_for('view_users'))
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()
             app.logger.error(f"Integrity error during user update: {e}")
-            flash('A database error occurred during user update. Please try again.', 'error')
+            flash('A database error occurred during user update. Please try again.', 'danger')
         except Exception as e:
             app.logger.error(f"Error during user update: {e}")
-            flash('An error occurred during user update. Please try again.', 'error')
+            flash('An error occurred during user update. Please try again.', 'danger')
         finally:
             db.session.close()
     return render_template('user/edit_user.html', user=user)
@@ -163,10 +163,10 @@ def delete_user(user_id):
         db.session.delete(user)
         db.session.commit()
         logger.info(f"User {user.username} deleted successfully.")
-        flash('User deleted successfully.')
+        flash('User deleted successfully.', 'success')
     except sqlalchemy.exc.IntegrityError:
         db.session.rollback()
-        flash('Cannot delete user as they have active bookings. Deleting them would damage our reputation.', 'error')
+        flash('Cannot delete user as they have active bookings. Deleting them would damage our reputation.', 'danger')
     return redirect(url_for('view_users'))
 
 @app.route('/view-users')
@@ -192,7 +192,7 @@ def create_user():
         db.session.add(new_user)
         db.session.commit()
         logger.info(f"New user created: {username}")
-        flash('New user created successfully.')
+        flash('New user created successfully.', 'success')
         return redirect(url_for('view_users'))
     
     return render_template('user/create_user.html', form=form)
@@ -223,15 +223,15 @@ def edit_bus(bus_id):
             bus.capacity = escape(request.form['capacity'].strip())
             db.session.commit()
             logger.info(f"Bus {bus.name} updated successfully.")
-            flash('Bus updated successfully.')
+            flash('Bus updated successfully.', 'success')
             return redirect(url_for('view_buses'))
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()
             app.logger.error(f"Integrity error during bus update: {e}")
-            flash('A database error occurred during bus update. Please try again.', 'error')
+            flash('A database error occurred during bus update. Please try again.', 'danger')
         except Exception as e:
             app.logger.error(f"Error during bus update: {e}")
-            flash('An error occurred during bus update. Please try again.', 'error')
+            flash('An error occurred during bus update. Please try again.', 'danger')
         finally:
             db.session.close()
     return render_template('bus/edit_bus.html', bus=bus)
@@ -247,10 +247,10 @@ def delete_bus(bus_id):
         db.session.delete(bus)
         db.session.commit()
         logger.info(f"Bus {bus.name} deleted successfully.")
-        flash('Bus deleted successfully.')
+        flash('Bus deleted successfully.', 'success')
     except sqlalchemy.exc.IntegrityError:
         db.session.rollback()
-        flash('Cannot delete bus as it is currently in use in bookings. Deleting it would harm customers.', 'error')
+        flash('Cannot delete bus as it is currently in use in bookings. Deleting it would harm customers.', 'danger')
     return redirect(url_for('view_buses'))
 
 @app.route('/add-bus', methods=['GET', 'POST'])
@@ -266,7 +266,7 @@ def add_bus():
         db.session.add(new_bus)
         db.session.commit()
         logger.info(f"New bus added: {name}")
-        flash('New bus added successfully.')
+        flash('New bus added successfully.', 'success')
         return redirect(url_for('view_buses'))
     return render_template('bus/add_bus.html', form=form)
 
@@ -297,15 +297,15 @@ def edit_destination(destination_id):
             destination.distance = escape(request.form['distance'].strip())
             db.session.commit()
             logger.info(f"Destination {destination.name} updated successfully.")
-            flash('Destination updated successfully.')
+            flash('Destination updated successfully.', 'success')
             return redirect(url_for('view_destinations'))
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()
             app.logger.error(f"Integrity error during destination update: {e}")
-            flash('A database error occurred during destination update. Please try again.', 'error')
+            flash('A database error occurred during destination update. Please try again.', 'danger')
         except Exception as e:
             app.logger.error(f"Error during destination update: {e}")
-            flash('An error occurred during destination update. Please try again.', 'error')
+            flash('An error occurred during destination update. Please try again.', 'danger')
         finally:
             db.session.close()
     return render_template('destination/edit_destination.html', destination=destination)
@@ -320,10 +320,10 @@ def delete_destination(destination_id):
         db.session.delete(destination)
         db.session.commit()
         logger.info(f"Destination {destination.name} deleted successfully.")
-        flash('Destination deleted successfully.')
+        flash('Destination deleted successfully.', 'success')
     except sqlalchemy.exc.IntegrityError:
         db.session.rollback()
-        flash('Cannot delete destination as it is currently in use in bookings. Deleting it would harm customers.', 'error')
+        flash('Cannot delete destination as it is currently in use in bookings. Deleting it would harm customers.', 'danger')
     return redirect(url_for('view_destinations'))
 
 @app.route('/add-destination', methods=['GET', 'POST'])
@@ -340,7 +340,7 @@ def add_destination():
         db.session.add(new_destination)
         db.session.commit()
         logger.info(f"New destination added: {name}")
-        flash('New destination added successfully.')
+        flash('New destination added successfully.', 'success')
         return redirect(url_for('view_destinations'))
     return render_template('destination/add_destination.html', form=form)
 # --------------------- Database CRUD operations for Destination Table -->END ---------------------
@@ -369,7 +369,7 @@ def edit_booking(booking_id):
             booking.travel_date = datetime.strptime(escape(request.form['travel_date']), '%Y-%m-%d')
             db.session.commit()
             logger.info(f"Booking {booking.booking_id} updated successfully.")
-            flash('Booking updated successfully.')
+            flash('Booking updated successfully.', 'success')
             return redirect(url_for('view_bookings'))
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()
@@ -391,7 +391,7 @@ def delete_booking(booking_id):
     db.session.delete(booking)
     db.session.commit()
     logger.info(f"Booking {booking.booking_id} deleted successfully.")
-    flash('Booking deleted successfully.')
+    flash('Booking deleted successfully.', 'success')
     return redirect(url_for('view_bookings'))
 
 # --------------------- Database CRUD operations for Booking Table -->END --------------------
@@ -445,7 +445,7 @@ def book_ticket():
             db.session.commit()
             assert new_booking.booking_id is not None, "Booking ID should be assigned after commit"
             logger.info(f"New booking created: {new_booking.booking_id}")
-            flash('Ticket booked successfully.')
+            flash('Ticket booked successfully.', 'success')
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()
             app.logger.error(f"Integrity error during booking: {e}")
@@ -503,7 +503,7 @@ def cancel_booking(booking_id):
         db.session.delete(booking)
         db.session.commit()
         logger.info(f"Booking {booking.booking_id} cancelled successfully.")
-        flash('Booking cancelled successfully.')
+        flash('Booking cancelled successfully.', 'success')
     except Exception as e:
         db.session.rollback()
         flash(f'Error cancelling booking: {e}')
