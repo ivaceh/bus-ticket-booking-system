@@ -2,9 +2,6 @@
 {% block title %}
     Login
 {% endblock %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='btbs/static/styles.css') }}">
-{% endblock %}
 
 {% block content %}
 
@@ -31,7 +28,7 @@
     </form>
 </div> -->
 
-<body class="text-center">
+<!-- <body class="text-center">
     <div class="container" style="background-color: paleturquoise; margin-top: 20px; width: -webkit-fill-available; height: 315px; border-radius: 25px;">
         <h2>Login</h2>
         <form method="POST" action="{{ url_for('login_page') }}">
@@ -47,9 +44,9 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-</body>
-
-<!-- <div class="container px-4 py-5 mx-auto">
+</body> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<div class="container px-4 py-5 mx-auto">
     <div class="card card0">
         <div class="d-flex flex-lg-row flex-column-reverse">
             <div class="card card1">
@@ -62,19 +59,20 @@
 
                         <h6 class="msg-info">Please login to your account</h6>
 
-                        <div class="form-group">
-                            <label class="form-control-label text-muted">Username</label>
-                            <input type="text" id="email" name="email" placeholder="Phone no or email id" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-control-label text-muted">Password</label>
-                            <input type="password" id="psw" name="psw" placeholder="Password" class="form-control">
-                        </div>
-
-                        <div class="row justify-content-center my-3 px-3">
-                            <button class="btn-block btn-color">Login to Tidi</button>
-                        </div>
+                        <form method="POST" action="{{ url_for('login_page') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                {{ form.username.label(class="form-control-label text-muted") }}
+                                {{ form.username(class="form-control", placeholder="Phone no or email id") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password.label(class="form-control-label text-muted") }}
+                                {{ form.password(class="form-control", placeholder="Password") }}
+                            </div>
+                            <div class="row justify-content-center my-3 px-3">
+                                <button type="submit" class="btn-block btn-color">Login to Tidi</button>
+                            </div>
+                        </form>
 
                         <div class="row justify-content-center my-2">
                             <a href="#"><small class="text-muted">Forgot Password?</small></a>
@@ -82,7 +80,7 @@
                     </div>
                 </div>
                 <div class="bottom text-center mb-5">
-                    <p href="#" class="sm-text mx-auto mb-3">Don't have an account?<button class="btn btn-white ml-2">Create new</button></p>
+                    <p class="sm-text mx-auto mb-3">Don't have an account?<a href="{{ url_for('register_page') }}" class="btn btn-white ml-2">Create new</a></p>
                 </div>
             </div>
             <div class="card card2">
@@ -93,5 +91,5 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 {% endblock %}
