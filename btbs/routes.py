@@ -110,12 +110,6 @@ def admin_main():
         return redirect(url_for('login_page'))
     return render_template('admin_main.html')
 
-@app.route('/admin-panel')
-def admin_panel():
-    if not session.get('logged_in') or not session.get('is_admin'):
-        flash('Access denied.', 'danger')
-        return redirect(url_for('login_page'))
-    return render_template('admin_panel.html')
 
 @app.route('/user-main')
 def user_main():
