@@ -5,46 +5,6 @@
 
 {% block content %}
 
-<!-- Login form in forms.py -->
-
-<!-- <div class="login-container">
-    <h2>Login</h2>
-    <form method="post" action="{{ url_for('login_page') }}">
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-            {{ form.username.label }}
-            {{ form.username(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.password.label }}
-            {{ form.password(class="form-control") }}
-        </div>
-        <div class="form-group">
-            <a href="{{ url_for('register_page') }}" class="btn btn-secondary">Create Account</a>
-        </div>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-primary") }}
-        </div>
-    </form>
-</div> -->
-
-<!-- <body class="text-center">
-    <div class="container" style="background-color: paleturquoise; margin-top: 20px; width: -webkit-fill-available; height: 315px; border-radius: 25px;">
-        <h2>Login</h2>
-        <form method="POST" action="{{ url_for('login_page') }}">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.username.label() }}
-                {{ form.username(class="form-control", placeholder="User Name") }}
-            </div>
-            <div class="form-group">
-                {{ form.password.label() }}
-                {{ form.password(class="form-control", placeholder="Password") }}
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-</body> -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 <div class="container px-4 py-5 mx-auto">
     <div class="card card0">
@@ -52,31 +12,26 @@
             <div class="card card1">
                 <div class="row justify-content-center my-auto">
                     <div class="col-md-8 col-10 my-5">
-                        <div class="row justify-content-center px-3 mb-3">
-                            <img id="logo" src="https://i.imgur.com/PSXxjNY.png">
-                        </div>
-                        <h3 class="mb-5 text-center heading">We are Tidi</h3>
-
-                        <h6 class="msg-info">Please login to your account</h6>
+                        <h5 class="msg-info">Please login to your account</h5>
 
                         <form method="POST" action="{{ url_for('login_page') }}">
                             {{ form.hidden_tag() }}
                             <div class="form-group">
                                 {{ form.username.label(class="form-control-label text-muted") }}
-                                {{ form.username(class="form-control", placeholder="Phone no or email id") }}
+                                {{ form.username(class="form-control", placeholder="Username") }}
                             </div>
                             <div class="form-group">
                                 {{ form.password.label(class="form-control-label text-muted") }}
                                 {{ form.password(class="form-control", placeholder="Password") }}
                             </div>
                             <div class="row justify-content-center my-3 px-3">
-                                <button type="submit" class="btn-block btn-color">Login to Tidi</button>
+                                <button type="submit" class="btn-block btn-color">Login</button>
                             </div>
                         </form>
 
-                        <div class="row justify-content-center my-2">
+                        <!-- <div class="row justify-content-center my-2">
                             <a href="#"><small class="text-muted">Forgot Password?</small></a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="bottom text-center mb-5">
@@ -85,8 +40,8 @@
             </div>
             <div class="card card2">
                 <div class="my-auto mx-md-5 px-md-5 right">
-                    <h3 class="text-white">We are more than just a company</h3>
-                    <small class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</small>
+                    <h3 class="text-white">Bus Ticket Booking System</h3>
+                    <small class="text-white">Welcome to our bus ticket booking system. This app is still being developed. Stay tuned for more features and improvements to enhance your travel experience.</small>
                 </div>
             </div>
         </div>
