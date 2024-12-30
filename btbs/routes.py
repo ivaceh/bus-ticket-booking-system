@@ -51,7 +51,7 @@ def login_page():
             flash('An error occurred during login. Please try again.', 'error')
         finally:
             db.session.close()
-    else:
+    elif form.is_submitted():
         flash('Form validation failed. Please check your inputs.')
     return render_template('login.html', form=form)
 
@@ -350,7 +350,7 @@ def add_destination():
 
 @app.route('/view-bookings')
 def view_bookings():
-    if not session.get('logged_in'):
+    if not session.get('logged_in') or not session.get('is_admin'):
         flash('Access denied.')
         return redirect(url_for('login_page'))
     bookings = Booking.query.all()

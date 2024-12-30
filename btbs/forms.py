@@ -113,7 +113,7 @@ class bookBusTicketForm(FlaskForm):
             self.destination_id.choices = [(destination.id, destination.name) for destination in Destination.query.all()]
 
     bus_id = SelectField('Bus ID', validators=[DataRequired()])
-    destination_id = SelectField('Destination ID', validators=[DataRequired()])
+    destination_id = SelectField('Destination Name', validators=[DataRequired()])
     travel_date = DateField('Travel Date', format='%Y-%m-%d', validators=[DataRequired()])
     user_id = HiddenField('User ID')
     booking_date = HiddenField('Booking Date')
