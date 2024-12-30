@@ -26,8 +26,8 @@
                 <td>{{ booking.booking_id }}</td>
                 <td>{{ bus.name }}</td>
                 <td>{{ destination.name }}</td>
-                <td>{{ booking.booking_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                <td>{{ booking.travel_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ booking.booking_date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ booking.travel_date.strftime('%Y-%m-%d') }}</td>
                 <td>
                     <a href="{{ url_for('cancel_booking', booking_id=booking.booking_id) }}" class="btn btn-danger">Cancel</a>
                 </td>
