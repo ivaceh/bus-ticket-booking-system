@@ -27,7 +27,7 @@
             {% if session.logged_in %}
               {% if session.is_admin %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+                  <a class="nav-link" href="{{ url_for('admin_main') }}">Admin Main</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{ url_for('view_bookings') }}">Booked Users</a>
@@ -52,7 +52,7 @@
                 </li>
               {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('user_dashboard') }}">User Dashboard</a>
+                  <a class="nav-link" href="{{ url_for('user_main') }}">User Main</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{ url_for('bookTicketForm') }}">Book Ticket</a>

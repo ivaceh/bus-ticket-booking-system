@@ -36,9 +36,9 @@ def login_page():
                     session.pop('isnot_admin', None)
                 logger.info(f"User {username} logged in successfully.", 'success')
                 if user.is_admin:
-                    return redirect('/admin-dashboard')
+                    return redirect('/admin-main')
                 else:
-                    return redirect('/user-dashboard')
+                    return redirect('/user-main')
             else:
                 logger.warning(f"Failed login attempt for username: {username}")
                 flash('Invalid username or password', 'danger')
@@ -103,12 +103,12 @@ def register():
         flash('Form validation failed. Please check your inputs.')
     return render_template('register.html', form=form)
 
-@app.route('/admin-dashboard')
-def admin_dashboard():
+@app.route('/admin-main')
+def admin_main():
     if not session.get('logged_in') or not session.get('is_admin'):
         flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
-    return render_template('admin_dashboard.html')
+    return render_template('admin_main.html')
 
 @app.route('/admin-panel')
 def admin_panel():
@@ -117,12 +117,12 @@ def admin_panel():
         return redirect(url_for('login_page'))
     return render_template('admin_panel.html')
 
-@app.route('/user-dashboard')
-def user_dashboard():
+@app.route('/user-main')
+def user_main():
     if not session.get('logged_in') or session.get('is_admin'):
         flash('Access denied.', 'danger')
         return redirect(url_for('login_page'))
-    return render_template('user_dashboard.html')
+    return render_template('user_main.html')
 
 # --------------------- Database CRUD operation for User table | Header ---------------------
 
