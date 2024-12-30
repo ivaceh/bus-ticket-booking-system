@@ -51,7 +51,7 @@ def login_page():
             flash('An error occurred during login. Please try again.', 'error')
         finally:
             db.session.close()
-    else:
+    elif form.is_submitted():
         flash('Form validation failed. Please check your inputs.')
     return render_template('login.html', form=form)
 
