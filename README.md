@@ -1,8 +1,15 @@
-# Bus Booking System
+<h1 align="center">Bus Booking System</h1>
 
-## Project Overview
+<div align="center">
 
-The Bus Booking System is a web application designed to facilitate the booking of bus tickets. It provides a user-friendly interface for users to register, log in, and book tickets for various bus routes. The system also includes an admin panel for managing users, buses, and destinations. Key features include user authentication, a responsive design, form validation, and security enhancements.
+[![Python version](https://img.shields.io/badge/python-3.12.6-blue.svg)](https://www.python.org/downloads/release/python-3126/)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://mit-license.org/)
+
+<h4>The Bus Booking System is a web application designed to facilitate the booking of bus tickets. It provides a user-friendly interface for users to register, log in, and book tickets for various bus routes. The system also includes an admin panel for managing users, buses, and destinations. Key features include user authentication, a responsive design, form validation, and security enhancements.</h4>
+
+</div>
+
+-----------------------------------------
 
 ### Features
 
@@ -32,6 +39,8 @@ The Bus Booking System is a web application designed to facilitate the booking o
    - Rate limiting to prevent brute force attacks.
    - CSRF protection for forms.
    - Secure session management.
+
+-----------------------------------------
 
 ## Installation and Setup Guide
 
@@ -65,6 +74,8 @@ The Bus Booking System is a web application designed to facilitate the booking o
    flask run
    ```
 
+-----------------------------------------
+
 ### Dependencies and Requirements
 
 - Python 3.8+
@@ -74,6 +85,8 @@ The Bus Booking System is a web application designed to facilitate the booking o
 - Flask-WTF
 - Flask-Limiter
 - SQLite
+
+-----------------------------------------
 
 ## Usage
 
@@ -101,9 +114,13 @@ The Bus Booking System is a web application designed to facilitate the booking o
    - Admin users can access the admin panel to manage users, buses, and destinations.
    - Use the buttons to view, create, update, and delete records.
 
+-----------------------------------------
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+
+
 
 ## References and Resources
 
