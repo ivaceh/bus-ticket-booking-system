@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    Available Destinations
+{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center" style="margin-top:20px; margin-left:10px; margin-right: 0px">
+    <div class="col-8 text-center">
+        <h2>Registered Buses</h2>
+        <br>
+        <table class="table table-hover table-dark table-bordered border-dark">
+        <thead class="thead-light">
+            <tr>
+                <th>Destination ID</th>
+                <th>Destination Name</th>
+                <th>Price</th>
+                <th>Distance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for destination in destinations %}
+            <tr>
+                <td>{{ destination.id }}</td>
+                <td>{{ destination.name }}</td>
+                <td>{{ destination.price }}</td>
+                <td>{{ destination.distance }}</td>
+                <td>
+                    <a href="{{ url_for('edit_destination', destination_id=destination.id) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ url_for('delete_destination', destination_id=destination.id) }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
